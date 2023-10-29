@@ -1,12 +1,14 @@
 import { defineConfig } from "tsup";
+
 import type { Options } from "tsup";
 
 const options: Options = {
   format: ["cjs", "esm"],
-  entry: ["{src,src/experimental}/*.{ts,tsx}", "!**/*.{spec,test,test-d}.*"],
+  entry: ["{src}/*.{ts,tsx}"],
   sourcemap: true,
   dts: true,
   splitting: false,
+  clean: true,
 };
 
 export default defineConfig(options);
