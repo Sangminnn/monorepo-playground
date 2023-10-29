@@ -8,7 +8,10 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+
+# build
 dist
+esm
 dist-ssr
 *.local
 
@@ -23,4 +26,5 @@ dist-ssr
 *.sln
 *.sw?
 
+# turbo
 .turbo

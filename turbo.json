@@ -1,6 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
+    "dev": { "dependsOn": ["^prepack"], "cache": false },
     "build": {
       "outputs": ["dist/**"]
     },
