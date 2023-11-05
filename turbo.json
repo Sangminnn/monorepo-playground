@@ -1,10 +1,13 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-    "dev": { "dependsOn": ["^prepack"], "cache": false },
+    "dev": { "dependsOn": [], "cache": false },
     "build": {
       "outputs": ["dist/**"]
     },
-    "lint": {}
+    "lint": {},
+    "clean": {
+      "cache": false
+    }
   }
 }

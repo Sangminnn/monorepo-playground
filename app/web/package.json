@@ -2,7 +2,6 @@
   "name": "my-react-app",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -10,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@web-client/common": "workspace:^",
+    "@web-client/common": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

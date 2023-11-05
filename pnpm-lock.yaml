@@ -12,27 +12,11 @@ importers:
         specifier: ^2.26.2
         version: 2.26.2
 
-  packages/common:
-    dependencies:
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-    devDependencies:
-      '@types/react':
-        specifier: ^18.2.15
-        version: 18.2.33
-      tsup:
-        specifier: ^7.2.0
-        version: 7.2.0(typescript@5.2.2)
-      typescript:
-        specifier: ^5.0.2
-        version: 5.2.2
-
-  packages/my-react-app:
+  app/web:
     dependencies:
       '@web-client/common':
-        specifier: workspace:^
-        version: link:../common
+        specifier: workspace:*
+        version: link:../../packages/common
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -70,6 +54,22 @@ importers:
       vite:
         specifier: ^4.4.5
         version: 4.5.0
+
+  packages/common:
+    dependencies:
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.15
+        version: 18.2.33
+      tsup:
+        specifier: ^7.2.0
+        version: 7.2.0(typescript@5.2.2)
+      typescript:
+        specifier: ^5.0.2
+        version: 5.2.2
 
 packages:
 
