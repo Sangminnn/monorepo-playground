@@ -4,7 +4,7 @@ import type { Options } from "tsup";
 
 const options: Options = {
   format: ["cjs", "esm"],
-  entry: ["{src}/*.{ts,tsx}"],
+  entry: ["src/index.ts", "{src}/*.{ts,tsx}"],
   sourcemap: true,
   dts: true,
   splitting: false,
