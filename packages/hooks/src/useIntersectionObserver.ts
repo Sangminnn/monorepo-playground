@@ -34,11 +34,12 @@ interface Props {
 const useIntersectionObserver = ({ action, options }: Props) => {
   const { manual = false, callOnce = false, ...originOptions } = options;
 
-  const observerRef = useRef<IntersectionObserver>(null);
+  // type | null 이라면 MutableRef
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   const bridgeRef = useCallback((node) => {
     // 재연결된것이라면 clear가 필요한지
-    const observer = new IntersectionObserver(([entry]) => {
+    observerRef.current = new IntersectionObserver(([entry]) => {
       if (!entry) return;
 
       // slash에서는 제어역전을 통해 사용처에서 entry를 받고, 이 값에 맞게 세팅할 수 있도록 한듯
@@ -56,14 +57,14 @@ const useIntersectionObserver = ({ action, options }: Props) => {
 
       if (!entry.isIntersecting) return;
 
-      const callAction = entry.isIntersecting && !manual;
-      const callManualAction = entry.isIntersecting && manual;
-
-      if (callAction) {
-        callOnce ? callOnceAction(node) : action();
-      } else if (callManualAction) {
+      // entry.isIntersecting인 케이스만 존재
+      if (manual) {
         action(entry);
+        return;
       }
+
+      // auto
+      callOnce ? callOnceAction(node) : action();
     }, originOptions);
 
     // 여기서 node가 있으면 observe 달아준다.
