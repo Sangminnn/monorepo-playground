@@ -1,9 +1,17 @@
 import { create } from "zustand";
 
-interface ConfirmStore {
+export interface OpenConfirmProps {
+  content: React.ReactNode;
+  confirmText?: React.ReactNode | string;
+  cancelText?: React.ReactNode | string;
+}
+
+export interface ConfirmStore {
   isOpen: boolean;
   content: React.ReactNode;
-  openConfirm: (content: React.ReactNode) => void;
+  confirmText?: React.ReactNode | string;
+  cancelText?: React.ReactNode | string;
+  openConfirm: ({ content, confirmText, cancelText }: OpenConfirmProps) => void;
   closeConfirm: () => void;
 }
 
@@ -11,15 +19,21 @@ interface ConfirmStore {
 const useConfirmStore = create<ConfirmStore>((set) => ({
   isOpen: false,
   content: null,
-  openConfirm: (content) =>
+  confirmText: "확인",
+  cancelText: "취소",
+  openConfirm: ({ content, confirmText, cancelText }) =>
     set((state) => ({
       isOpen: (state.isOpen = true),
       content: (state.content = content),
+      confirmText: (state.confirmText = confirmText ?? "확인"),
+      cancelText: (state.cancelText = cancelText ?? "취소"),
     })),
   closeConfirm: () =>
     set((state) => ({
       isOpen: (state.isOpen = false),
       content: (state.content = null),
+      confirmText: (state.confirmText = "확인"),
+      cancelText: (state.cancelText = "취소"),
     })),
 }));
 

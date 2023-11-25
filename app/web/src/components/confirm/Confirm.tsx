@@ -3,19 +3,23 @@ import useConfirmStore from "../../store/confirmStore";
 
 function Confirm() {
   /** @TODO shallow option 추가하기 */
-  const { isOpen, content } = useConfirmStore((state) => ({
-    isOpen: state.isOpen,
-    content: state.content,
-  }));
+  const { isOpen, content, confirmText, cancelText } = useConfirmStore(
+    (state) => ({
+      isOpen: state.isOpen,
+      content: state.content,
+      confirmText: state.confirmText,
+      cancelText: state.cancelText,
+    })
+  );
 
   return isOpen ? (
     <section>
       <div>{content}</div>
       <button onClick={() => eventEmitter.emit("confirm-result", true)}>
-        확인
+        {confirmText}
       </button>
       <button onClick={() => eventEmitter.emit("confirm-result", false)}>
-        취소
+        {cancelText}
       </button>
     </section>
   ) : null;

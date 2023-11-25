@@ -13,7 +13,11 @@ function App() {
   }));
 
   const confirmClick = async () => {
-    const isConfirmed = await confirm.open(<div>테스트입니다.</div>);
+    const isConfirmed = await confirm.open({
+      content: <div>테스트입니다.</div>,
+      confirmText: "테스트 확인",
+      cancelText: "테스트 취소",
+    });
 
     if (isConfirmed) {
       console.log("확인 완료", isConfirmed);
