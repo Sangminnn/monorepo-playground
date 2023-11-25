@@ -10,7 +10,7 @@ function Confirm() {
 
   return isOpen ? (
     <section>
-      <p>{content}</p>
+      <div>{content}</div>
       <button onClick={() => eventEmitter.emit("confirm-result", true)}>
         확인
       </button>
