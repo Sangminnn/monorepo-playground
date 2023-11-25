@@ -6,3 +6,4 @@
   - package manager : pnpm (with workspace)
   - workspace manager : turbo
   - module bundler : tsup
+  - client state management : zustand
