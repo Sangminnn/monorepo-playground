@@ -22,18 +22,18 @@ const useConfirmStore = create<ConfirmStore>((set) => ({
   confirmText: "확인",
   cancelText: "취소",
   openConfirm: ({ content, confirmText, cancelText }) =>
-    set((state) => ({
-      isOpen: (state.isOpen = true),
-      content: (state.content = content),
-      confirmText: (state.confirmText = confirmText ?? "확인"),
-      cancelText: (state.cancelText = cancelText ?? "취소"),
+    set(() => ({
+      isOpen: true,
+      content,
+      confirmText: confirmText ?? "확인",
+      cancelText: cancelText ?? "취소",
     })),
   closeConfirm: () =>
-    set((state) => ({
-      isOpen: (state.isOpen = false),
-      content: (state.content = null),
-      confirmText: (state.confirmText = "확인"),
-      cancelText: (state.cancelText = "취소"),
+    set(() => ({
+      isOpen: false,
+      content: null,
+      confirmText: "확인",
+      cancelText: "취소",
     })),
 }));
 
