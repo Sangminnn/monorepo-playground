@@ -3,14 +3,17 @@ import { Button } from "@web-client/common";
 import Confirm from "./components/confirm/Confirm";
 
 import useConfirmStore from "./store/confirmStore";
+import { useShallow } from "zustand/react/shallow";
 
 import { useConfirm } from "./hooks/useConfirm";
 
 function App() {
   const confirm = useConfirm();
-  const { closeConfirm } = useConfirmStore((state) => ({
-    closeConfirm: state.closeConfirm,
-  }));
+  const { closeConfirm } = useConfirmStore(
+    useShallow((state) => ({
+      closeConfirm: state.closeConfirm,
+    }))
+  );
 
   const confirmClick = async () => {
     const isConfirmed = await confirm.open({
