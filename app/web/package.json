@@ -9,11 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.3.1",
+    "@tanstack/react-virtual": "3.0.0-alpha.0",
     "@web-client/common": "workspace:*",
     "axios": "^1.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-virtualized": "^9.22.5",
+    "styled-components": "^6.1.4",
     "zod": "^3.22.4",
     "zustand": "^4.4.6"
   },

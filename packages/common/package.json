@@ -24,7 +24,9 @@
   "author": "sangminnn",
   "license": "ISC",
   "dependencies": {
-    "react": "^18.2.0"
+    "@floating-ui/react": "^0.26.4",
+    "react": "^18.2.0",
+    "styled-components": "^6.1.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

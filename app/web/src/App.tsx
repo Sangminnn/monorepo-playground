@@ -1,4 +1,4 @@
-import { Button } from "@web-client/common";
+import { Button, Tooltip, Spacing } from "@web-client/common";
 
 import Confirm from "./components/confirm/Confirm";
 
@@ -32,10 +32,33 @@ function App() {
   };
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        margin: "0 auto",
+        width: "1000px",
+      }}
+    >
       <Button onClick={confirmClick} />
       <Confirm />
-    </>
+
+      <Spacing height={300} />
+
+      <Tooltip
+        placement={"top"}
+        space={8}
+        content={"테스트입니다."}
+        tooltipStyle={{
+          backgroundColor: "#666666",
+        }}
+        closeWhenOtherPlaceClick={false}
+      >
+        <div>테스트</div>
+      </Tooltip>
+    </div>
   );
 }
 
