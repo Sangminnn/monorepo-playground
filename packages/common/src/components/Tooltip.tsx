@@ -8,6 +8,7 @@ import {
   arrow,
   autoUpdate,
   FloatingArrow,
+  Placement,
 } from "@floating-ui/react";
 
 interface TooltipProps {
@@ -17,7 +18,7 @@ interface TooltipProps {
   onClick?: (e?: any) => void;
   callOnce?: boolean;
   time?: number;
-  placement: "left" | "right" | "top" | "bottom";
+  placement: Placement;
   space?: number;
   tooltipStyle?: React.CSSProperties;
   closeWhenOtherPlaceClick?: boolean;
@@ -50,7 +51,7 @@ const Tooltip = ({
   const [isShow, setIsShow] = useState(defaultOpen);
 
   const arrowRef = useRef(null);
-  const { x, y, strategy, refs, context } = useFloating({
+  const { x, y, floatingStyles, strategy, refs, context } = useFloating({
     placement,
     middleware: [
       offset(space),
@@ -109,30 +110,26 @@ const Tooltip = ({
     <>
       {triggerComponent}
       {isShow && (
-        <div>
-          <FloatingArrow
-            ref={arrowRef}
-            context={context}
-            width={12}
-            height={5}
-            fill={arrowColor}
-            style={{
-              left: `${x}px`,
-              top: `${-(arrowRef?.current as any)?.offsetHeight / 2}`,
-            }}
-          />
+        <>
           <TooltipBody
             ref={refs.setFloating}
             style={{
-              position: strategy,
-              top: y ?? 0,
-              left: x ?? 0,
+              ...floatingStyles,
               ...tooltipStyle,
             }}
           >
+            <FloatingArrow
+              ref={arrowRef}
+              context={context}
+              width={12}
+              height={5}
+              fill={arrowColor}
+              staticOffset={(context.middlewareData.arrow?.x ?? 0) - 30}
+              style={{ transform: "translateY(-0.5px)" }}
+            />
             {content}
           </TooltipBody>
-        </div>
+        </>
       )}
     </>
   );
