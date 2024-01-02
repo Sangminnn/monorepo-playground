@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 
 import styled from "styled-components";
 
+import useOverlappingElements from "../hooks/useOverlappingElements";
+
 import {
   useFloating,
   offset,
@@ -21,6 +23,7 @@ interface TooltipProps {
   placement: Placement;
   space?: number;
   tooltipStyle?: React.CSSProperties;
+  arrowStyle?: React.CSSProperties;
   closeWhenOtherPlaceClick?: boolean;
 }
 
@@ -46,6 +49,7 @@ const Tooltip = ({
   placement = "bottom",
   space = 7,
   tooltipStyle,
+  arrowStyle,
   closeWhenOtherPlaceClick = true,
 }: TooltipProps) => {
   const [isShow, setIsShow] = useState(defaultOpen);
@@ -60,6 +64,12 @@ const Tooltip = ({
       }),
     ],
     whileElementsMounted: autoUpdate,
+  });
+
+  const { clipPath } = useOverlappingElements({
+    parentRef: refs.floating,
+    childRef: arrowRef,
+    isShow,
   });
 
   useEffect(() => {
@@ -109,28 +119,31 @@ const Tooltip = ({
   return (
     <>
       {triggerComponent}
-      {isShow && (
-        <>
-          <TooltipBody
-            ref={refs.setFloating}
+      {/* {isShow && ( */}
+      <>
+        <TooltipBody
+          ref={refs.setFloating}
+          style={{
+            ...floatingStyles,
+            ...tooltipStyle,
+          }}
+        >
+          <FloatingArrow
+            ref={arrowRef}
+            context={context}
+            width={12}
+            height={5}
+            fill={"rgba(255, 0, 0, 0.2)"}
+            staticOffset={(context.middlewareData.arrow?.x ?? 0) - 30}
             style={{
-              ...floatingStyles,
-              ...tooltipStyle,
+              ...arrowStyle,
+              clipPath,
             }}
-          >
-            <FloatingArrow
-              ref={arrowRef}
-              context={context}
-              width={12}
-              height={5}
-              fill={arrowColor}
-              staticOffset={(context.middlewareData.arrow?.x ?? 0) - 30}
-              style={{ transform: "translateY(-0.5px)" }}
-            />
-            {content}
-          </TooltipBody>
-        </>
-      )}
+          />
+          {content}
+        </TooltipBody>
+      </>
+      {/* )} */}
     </>
   );
 };
@@ -138,7 +151,7 @@ const Tooltip = ({
 export default Tooltip;
 
 const TooltipBody = styled.div`
-  position: relative;
+  position: absolute;
   width: max-content;
   max-width: 250px;
   border-radius: 6px;
