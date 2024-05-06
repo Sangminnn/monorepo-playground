@@ -3,7 +3,7 @@ import formatNumberToKRW, {
   floorNumber,
   FormatNumberToKRWProps,
   roundNumber,
-} from "./formatNumberToKRW";
+} from ".";
 
 describe("ceil, floor, round", () => {
   test("ceilNumber", () => {
