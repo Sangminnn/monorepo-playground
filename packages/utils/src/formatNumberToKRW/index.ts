@@ -81,6 +81,6 @@ export const formatNumberToKRW = ({
     (actionTargetLine * 10);
 
   return value > dividePriceLine
-    ? `${setCommaForNumber(cuttingNumber(formattedNumber))}만원`
+    ? `${setCommaForNumber(cuttingNumber({ value: formattedNumber }))}만원`
     : `${setCommaForNumber(formattedNumber)}원`;
 };

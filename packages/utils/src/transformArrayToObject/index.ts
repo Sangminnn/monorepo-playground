@@ -4,7 +4,7 @@
  *
  * 다만 list의 key를 올바르게 추론하기 위해서는 배열을 as const로 단언해주어야합니다.
  * */
-const transformArrayToObject = <T extends string[] | readonly string[]>(
+export const transformArrayToObject = <T extends string[] | readonly string[]>(
   list: T
 ) => {
   const result = {} as { [key in T[number]]: number };
@@ -16,10 +16,3 @@ const transformArrayToObject = <T extends string[] | readonly string[]>(
 
   return result;
 };
-
-const setCommaForNumber = (data: string | number) => {
-  const stringConvertedData = typeof data === "number" ? String(data) : data;
-  return stringConvertedData?.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
-
-const cuttingNumber = (number: number) => number / 10000;
